@@ -3,7 +3,9 @@ const bodyParser= require("body-parser");
 const request = require("request");
 const app=express();
 const https =require("https");
+const dotenv=require("dotenv").config();
 app.use(express.static("public"));
+
 
 app.use(bodyParser.urlencoded({extended:true}))
 app.get("/", function(req, res)
@@ -16,6 +18,7 @@ app.post("/", function(req, res)
     const firstname=req.body.fname;
     const lastname= req.body.lname;
     const email=req.body.email;
+    const api_key=process.env.API_KEY;
 
     const data ={
         members:[
@@ -35,7 +38,7 @@ app.post("/", function(req, res)
     const url="https://us21.api.mailchimp.com/3.0/lists/ade838a260"
     const options={
         method:"POST",
-        auth:"Satishg:76d3799bc7ea8c151d36a270f8e1d630-us21"
+        auth:"Satishg:"+api_key
     }
    const request= https.request(url, options, function(response)
     {
@@ -71,14 +74,13 @@ app.post("/failure", function(req,res)
 app.listen(process.env.PORT || 3000, function()
 {
     console.log("server is listening on port 3000:");
+    
 })
 
 
 
-// 11394afd203da6ee0599470f75ac1786-us21
 
 // Audience ID
 // ade838a260.
 
-// new Api
-// 76d3799bc7ea8c151d36a270f8e1d630-us21
+
