@@ -18,7 +18,7 @@ app.post("/", function(req, res)
     const firstname=req.body.fname;
     const lastname= req.body.lname;
     const email=req.body.email;
-    const api_key=process.env.API_KEY;
+    const api_key="satishg:"+process.env.API_KEY;
 
     const data ={
         members:[
@@ -38,7 +38,7 @@ app.post("/", function(req, res)
     const url="https://us21.api.mailchimp.com/3.0/lists/ade838a260"
     const options={
         method:"POST",
-        auth:"Satishg:"+api_key
+        auth:"satishg:"+process.env.API_KEY
     }
    const request= https.request(url, options, function(response)
     {
